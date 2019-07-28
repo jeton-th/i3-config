@@ -15,7 +15,7 @@ monitor = ${env:MONITOR:LVDS1}
 width = 100%
 height = 27
 radius = 0
-fixed-center = false
+fixed-center = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 line-size = 3
@@ -23,7 +23,7 @@ line-color = #f00
 border-size = 0
 border-color = #00000000
 padding-left = 4
-padding-right = 2
+padding-right = 4 
 module-margin-left = 2
 module-margin-right = 2
 font-0 = Roboto fixed:pixelsize=9;1
@@ -105,16 +105,13 @@ label-indicator-background = ${colors.secondary}
 [module/xbacklight]
 type = internal/xbacklight
 format = <label> <bar>
-label = 
+label =
 bar-width = 10
-bar-indicator = |
+bar-indicator = 
 bar-indicator-foreground = #fff
-bar-indicator-font = 2
 bar-fill = ─
-bar-fill-font = 2
 bar-fill-foreground = #fff
 bar-empty = ─
-bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
 [module/date]
@@ -130,20 +127,16 @@ label = %date% %time%
 [module/alsa]
 type = internal/alsa
 format-volume = <label-volume> <bar-volume>
-label-volume = 
+label-volume =
 label-volume-foreground = ${root.foreground}
 format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
 bar-volume-width = 11
 bar-volume-foreground = #fff
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
+bar-volume-indicator = 
 bar-volume-fill = ─
-bar-volume-fill-font = 2
 bar-volume-empty = ─
-bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
 # [module/battery]

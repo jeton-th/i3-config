@@ -76,14 +76,13 @@ bindsym $mod+minus scratchpad show
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
+set $ws4 "4:Slack"
+set $ws5 "5:Zoom"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -118,24 +117,16 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym $left       resize shrink width 10 px or 10 ppt
         bindsym $down       resize grow height 10 px or 10 ppt
         bindsym $up         resize shrink height 10 px or 10 ppt
         bindsym $right      resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
         bindsym Left        resize shrink width 5 px or 5 ppt
         bindsym Down        resize grow height 5 px or 5 ppt
         bindsym Up          resize shrink height 5 px or 5 ppt
         bindsym Right       resize grow width 5 px or 5 ppt
 
-        # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
@@ -146,25 +137,36 @@ bindsym $mod+r mode "resize"
 # bar {
 #         status_command i3status
 #         tray_output primary
-#         font pango:Roboto 11
+#         strip_workspace_numbers yes
+#         font pango:Roboto 10
+#         height 30
+#         colors {
+#                 background #222222
+#                 statusline #dfdfdf
+#                 focused_workspace  #333333 #333333 #dfdfdf
+#                 active_workspace   #333333 #333333 #dfdfdf
+#                 inactive_workspace #222222 #222222 #dfdfdf
+#                 urgent_workspace   #c04040 #c04040 #dfdfdf
+#                 binding_mode       #c04040 #c04040 #dfdfdf
+#         }
 # }
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id "setxkbmap -layout us,al,mk,ar -variant ,plisi,,"
+exec --no-startup-id "setxkbmap -option 'grp:alt_shift_toggle'"
 exec --no-startup-id xsetroot -solid "#333333"
 exec --no-startup-id nm-applet
-exec "setxkbmap -layout us,al,mk,ar"
-exec "setxkbmap -option 'grp:win_space_toggle'"
+exec --no-startup-id volumeicon
 
 focus_follows_mouse no
 default_border pixel 0
 gaps inner 20
 smart_gaps on
 
-# Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -10%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+for_window [urgent="latest"] focus
+for_window [class="(?i)chromium"] move container to workspace $ws1
+for_window [class="(?i)slack"] move container to workspace $ws4
+for_window [class="(?i)zoom"] move container to workspace $ws5

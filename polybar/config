@@ -31,9 +31,9 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = Material Design Icons:style=Regular:pixelsize=10
 
-modules-left = powermenu i3
+modules-left = powermenu apps i3
 modules-center = xwindow
-modules-right = xkeyboard xbacklight date 
+modules-right = xkeyboard xbacklight date
 tray-position = right
 tray-padding = 4
 cursor-click = pointer
@@ -44,17 +44,22 @@ type = custom/menu
 expand-right = true
 format-spacing = 3
 label-open = 
-label-open-foreground = ${colors.foreground}
 label-close =  Cancel
-label-close-foreground = ${colors.secondary}
 label-separator = " "
-label-separator-foreground = ${colors.foreground-alt}
 menu-0-0 = Shut down
 menu-0-0-exec = poweroff
 menu-0-1 = Restart
 menu-0-1-exec = reboot
 menu-0-2 = Logout
 menu-0-2-exec = i3-msg exit
+menu-0-0-foreground = ${colors.primary}
+menu-0-1-foreground = ${colors.primary}
+menu-0-2-foreground = ${colors.primary}
+
+[module/apps]
+type = custom/text
+content = Apps
+click-left = j4-dmenu-desktop --dmenu="dmenu -i"
 
 [module/bspwm]
 type = internal/bspwm
@@ -73,7 +78,6 @@ label-empty-padding = 2
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
-strip-wsnumbers = true
 wrapping-scroll = false
 label-mode-padding = 2
 label-mode-foreground = #000

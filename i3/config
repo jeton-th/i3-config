@@ -11,8 +11,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -l 20"
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i"
 
 # change focus
 bindsym $mod+$left focus left
@@ -136,10 +135,12 @@ bindsym $mod+r mode "resize"
 
 # bar {
 #         status_command i3status
-#         tray_output primary
-#         strip_workspace_numbers yes
+# 	position top
+#         height 27
 #         font pango:Roboto 10
-#         height 30
+#         strip_workspace_numbers yes
+#         tray_output primary
+#         tray_padding 7
 #         colors {
 #                 background #222222
 #                 statusline #dfdfdf
@@ -152,9 +153,8 @@ bindsym $mod+r mode "resize"
 # }
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id "setxkbmap -layout us,al,mk,ar -variant ,plisi,,"
-exec --no-startup-id "setxkbmap -option 'grp:alt_shift_toggle'"
-exec --no-startup-id xsetroot -solid "#333333"
+exec_always --no-startup-id setxkbmap -layout us,al,mk,ar -variant ,plisi,, -option grp:alt_shift_toggle
+exec --no-startup-id xsetroot -solid "#eeeeee"
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 
@@ -163,10 +163,12 @@ default_border pixel 0
 gaps inner 20
 smart_gaps on
 
+bindsym Print exec --no-startup-id gnome-screenshot -i
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 
 for_window [urgent="latest"] focus
 for_window [class="(?i)chromium"] move container to workspace $ws1
+for_window [class="(?i)code"] move container to workspace $ws2
 for_window [class="(?i)slack"] move container to workspace $ws4
 for_window [class="(?i)zoom"] move container to workspace $ws5
